@@ -4,6 +4,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
+    // eslint-disable-next-line
     const [_, setLoggedIn, removeLoggedIn] = useLocalStorage('loggedIn', true);
     const navigate = useNavigate();
     const handleLogout = () => {

@@ -29,11 +29,11 @@ type ErrorsType = {
 const validate = (value: UserType) => {
     const errors: Record<string, string> = {};
 
-    if (value['name'] == '') {
+    if (value['name'] === '') {
         errors['name'] = REQUIRED_TEXT_ERROR_MESSAGE;
     }
 
-    if (value['profession'] == '') {
+    if (value['profession'] === '') {
         errors['profession'] = REQUIRED_TEXT_ERROR_MESSAGE;
     }
 
@@ -52,7 +52,6 @@ const UserForm = ({ onClose, onSave }: UserFormType) => {
         profession: ''
     });
     const { users } = useSelector((state: { users: UsersType }) => state);
-    const [isInvalid, setIsInvalid] = useState(false);
     const [errors, setErrors] = useState<ErrorsType>({});
     const [isShowError, setIsShowError] = useState(false);
 
@@ -63,7 +62,7 @@ const UserForm = ({ onClose, onSave }: UserFormType) => {
                 setValue(currentUser);
             }
         }
-    }, [users]);
+    }, [users, searchParams]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value: fieldValue } = e.target;
