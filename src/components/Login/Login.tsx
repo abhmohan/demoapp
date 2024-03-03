@@ -36,7 +36,7 @@ const Login = () => {
         if (loggedIn) {
             navigate('/home');
         }
-    }, [loggedIn]);
+    }, [loggedIn, setSearchParams, searchParams, setLoggedIn, navigate]);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
