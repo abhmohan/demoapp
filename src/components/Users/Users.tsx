@@ -18,7 +18,7 @@ import Layout from '../Layout';
 import styles from './Users.module.css';
 
 const Users = () => {
-    const { users } = useSelector((state: { users: UsersType }) => state);
+    const users = useSelector((state: { users: UsersType }) => state.users);
     const dispatch = useDispatch();
     const navigate = useNavigate ();
     const [searchParams, setSearchParams] = useSearchParams();

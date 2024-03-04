@@ -13,34 +13,32 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isValid, setIsValid] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
-    const [initialUsername] = useLocalStorage('initialUsername', searchParams.get('initialUsername'));
-    const [initialPassword] = useLocalStorage('initialPassword', searchParams.get('initialPassword'));
+    const [initialUsername, setInitialUsername] = useLocalStorage('initialUsername');
+    const [initialPassword, setInitialPassword] = useLocalStorage('initialPassword');
     const [loggedIn, setLoggedIn] = useLocalStorage('loggedIn', false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const initialUsername = searchParams.get('initialUsername');
-        const initialPassword = searchParams.get('initialPassword');
+        const username = searchParams.get('initialUsername');
+        const password = searchParams.get('initialPassword');
 
-
-        if (initialUsername && initialPassword) {
+        if (username && password && (initialUsername == null || initialPassword == null)) {
             setSearchParams((params) => {
                 params.delete('initialUsername');
                 params.delete('initialPassword');
                 return params;
             });
-            setLoggedIn(true);
+            setInitialUsername(username);
+            setInitialPassword(password);
         }
 
-        console.log(loggedIn);
-        if (loggedIn) {
+        if (initialUsername && initialPassword && loggedIn) {
             navigate('/home');
         }
-    }, [loggedIn, setSearchParams, searchParams, setLoggedIn, navigate]);
+    }, [setInitialUsername, setInitialPassword, loggedIn, setSearchParams, searchParams, setLoggedIn, navigate, initialUsername, initialPassword]);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        console.log(initialUsername, initialPassword);
         if (userName !== initialUsername || password !== initialPassword) {
             setIsValid(false);
             return;
